@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
 
 class Matrix
 {
@@ -9,7 +11,7 @@ class Matrix
     int number_of_rows;
     int number_of_columns;
 
-    vector<vector<int>> matrix;
+    std::vector<std::vector<int>> matrix;
 
     public:
     int get_numbers_strs ()const
@@ -26,19 +28,19 @@ class Matrix
         return matrix[str_index][column_index];
     }
 
-   Matrix() : number_of_rows(2), number_of_columns(2)
+    Matrix() : number_of_rows(2), number_of_columns(2)
     {
-        matrix.resize(number_of_rows, vector<int>(number_of_columns, 0));
+        matrix.resize(number_of_rows, std::vector<int>(number_of_columns, 0));
     }
     
-    Matrix(int rang) : number_of_rows(rang), number_of_columns(rang)
+    explicit Matrix(int rang) : number_of_rows(rang), number_of_columns(rang)
     {
-        matrix.resize(number_of_rows, vector<int>(number_of_columns, 0));
+        matrix.resize(number_of_rows, std::vector<int>(number_of_columns, 0));
     }
 
     Matrix(int rows, int columns) : number_of_rows(rows), number_of_columns(columns)
     {
-        matrix.resize(number_of_rows, vector<int>(number_of_columns, 0));
+        matrix.resize(number_of_rows, std::vector<int>(number_of_columns, 0));
     }
 
     void Create()
@@ -67,7 +69,7 @@ class Matrix
         cout << "\n";
     }
 
-    void Subtraction(Matrix &subtractor)
+    void Subtraction(const Matrix &subtractor)
     {
         if(subtractor.get_numbers_columns() == number_of_columns && subtractor.get_numbers_strs() == number_of_rows)
         {
