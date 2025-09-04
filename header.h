@@ -4,13 +4,12 @@ using namespace std;
 class Matrix
 {
     private:
-    int number_of_strs = 0;
-    int number_of_columns = 0;
-
-    public:
+    int number_of_strs;
+    int number_of_columns;
 
     int **matrix = nullptr;
 
+    public:
     int get_numbers_strs ()const
     {
         return number_of_columns;
@@ -20,22 +19,21 @@ class Matrix
         return number_of_strs;
     }
 
-    Matrix()
+    int get_matrix_value(int str_index, int column_index) const
     {
-        number_of_columns = 2;
-        number_of_strs = 2;
+        return matrix[str_index][column_index];
+    }
 
+    Matrix() : number_of_columns (2), number_of_strs(2)
+    {
         matrix = new int* [number_of_strs];
         for(int i = 0;i < number_of_columns;i++)
         {
             matrix[i] = new int[number_of_columns]();
         }
     }
-    Matrix(int rang)
+    Matrix(int rang) : number_of_columns(rang), number_of_strs(rang)
     {
-        number_of_columns = rang;
-        number_of_strs = rang;
-
         matrix = new int* [number_of_strs];
         for(int i = 0;i < number_of_columns;i++)
         {
@@ -43,11 +41,8 @@ class Matrix
         }
     }
 
-    Matrix(int number_of_strs, int number_of_columns)
+    Matrix(int number_of_strs, int number_of_columns) : number_of_strs(number_of_strs), number_of_columns(number_of_columns)
     {
-        this -> number_of_columns = number_of_columns;
-        this -> number_of_strs = number_of_strs;
-
         matrix = new int* [number_of_strs];
         for(int i = 0;i < number_of_columns;i++)
         {
@@ -68,7 +63,7 @@ class Matrix
 
     }
 
-    void Show()
+    void Show() const
     {
         for(int i = 0;i < number_of_strs;i++)
         {
@@ -89,7 +84,7 @@ class Matrix
             {
                 for(int j = 0;j < number_of_columns;j++)
                 {
-                    matrix[i][j] -= subtractor.matrix[i][j];
+                    matrix[i][j] -= subtractor.get_matrix_value(i,j);
                 }
             }
         }
@@ -97,5 +92,10 @@ class Matrix
         {
             cout << "Error, Matrixs are not equal\n";
         }
+    }
+
+    ~Matrix()
+    {
+        delete[] matrix;
     }
 };
